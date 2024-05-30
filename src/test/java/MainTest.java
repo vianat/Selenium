@@ -1,16 +1,12 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pom.base.BaseTest;
 
-public class Main {
+public class MainTest extends BaseTest {
 
     @Test
     public  void e2e() throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://askomdch.com");
-        driver.manage().window().maximize();
 
         driver.findElement(By.cssSelector("#menu-item-1227 a")).click();
 
@@ -44,14 +40,10 @@ public class Main {
         Assert.assertEquals(driver.findElement(By.tagName("h1")).getText(),
                 "Checkout");
 
-        driver.quit();
     }
 
     @Test
     public  void e2eWithLogin() throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://askomdch.com");
-        driver.manage().window().maximize();
 
         driver.findElement(By.cssSelector("#menu-item-1227 a")).click();
 
@@ -93,6 +85,5 @@ public class Main {
         Assert.assertEquals(driver.findElement(By.tagName("h1")).getText(),
                 "Checkout");
 
-        driver.quit();
     }
 }
