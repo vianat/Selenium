@@ -2,22 +2,24 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pom.base.BaseTest;
+import pom.pages.HomePage;
+import pom.pages.StorePage;
 
 public class MainTest extends BaseTest {
 
     @Test
     public  void e2e() throws InterruptedException {
 
-        driver.findElement(By.cssSelector("#menu-item-1227 a")).click();
+        HomePage hp = new HomePage(driver);
 
-        driver.findElement(By.cssSelector("#woocommerce-product-search-field-0")).sendKeys("blue");
+        StorePage sp = hp.clickStoreMenuLink();
 
-        driver.findElement(By.cssSelector("button[value='Search']")).click();
+        sp.enterTextInSearchField("blue");
+        sp.clickSearchBtn();
 
-        Assert.assertEquals(driver.findElement(By.xpath("//h1[contains(text(),'Search results: “blue”')]")).getText(),
-                "Search results: “blue”");
+        Assert.assertEquals(sp.getTitle(),"Search results: “blue”");
 
-        driver.findElement(By.cssSelector("a[aria-label='Add “Blue Shoes” to your cart']")).click();
+        sp.clickAddToCartBtn("Blue Shoes");
 
         Thread.sleep(1500);
         driver.findElement(By.cssSelector("a[title='View cart']")).click();
