@@ -1,41 +1,48 @@
-import org.openqa.selenium.By;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pom.base.BaseTest;
 import pom.objects.BillingAddress;
+import pom.objects.Product;
+import pom.objects.User;
 import pom.pages.CartPage;
 import pom.pages.CheckoutPage;
 import pom.pages.HomePage;
 import pom.pages.StorePage;
+import utils.JacksonUtils;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class MainTest extends BaseTest {
 
 
 
     @Test
-    public  void e2e() throws InterruptedException {
+    public  void e2e() throws InterruptedException, IOException {
+        String searchingFor = "blue";
+        Product product = new Product(1215);
+//v1
+        BillingAddress billingAddress = JacksonUtils.deserializeJson("myBillingAdress.json", BillingAddress.class);
 
-        BillingAddress billingAddress = new BillingAddress();
-        billingAddress.setFirstName("myName");
-        billingAddress.setLastName("myLastName");
-        billingAddress.setCity("myCity");
-        billingAddress.setZip("47373");
-        billingAddress.setEmail("thisisme@gmail.com");
+//v2    BillingAddress billingAddress = new BillingAddress("myName","myLastName","myCity","47373","thisisme@gmail.com");
+
+
 
         StorePage storePage = new HomePage(driver)
                 .load()
                 .clickStoreMenuLink()
-                .search("blue");
+                .search(searchingFor);
 
-        Assert.assertEquals(storePage.getTitle(),"Search results: “blue”");
+        Assert.assertEquals(storePage.getTitle(),"Search results: “"+searchingFor+"”");
 
-        storePage.clickAddToCartBtn("Blue Shoes");
+        storePage.clickAddToCartBtn(product.getName());
 
         Thread.sleep(1500);
 
         CartPage cartPage = storePage.clickViewCart();
 
-        Assert.assertEquals(cartPage.getProductName(), "Blue Shoes");
+        Assert.assertEquals(cartPage.getProductName(), product.getName());
 
         CheckoutPage checkoutPage = cartPage.
                 clickCheckoutBtn().
@@ -49,38 +56,39 @@ public class MainTest extends BaseTest {
     }
 
     @Test
-    public  void e2eWithLogin() throws InterruptedException {
+    public  void e2eWithLogin() throws InterruptedException, IOException {
 
-        BillingAddress billingAddress = new BillingAddress();
-        billingAddress.setFirstName("myName");
-        billingAddress.setLastName("myLastName");
-        billingAddress.setCity("myCity");
-        billingAddress.setZip("47373");
-        billingAddress.setEmail("thisisme@gmail.com");
+        String searchingFor = "blue";
+        Product product = new Product(1215);
+        User user = new User("Fufel", "TsqvCmNjwGde2tm");
+//v1
+        BillingAddress billingAddress = JacksonUtils.deserializeJson("myBillingAdress.json", BillingAddress.class);
+
+//v2    BillingAddress billingAddress = new BillingAddress("myName","myLastName","myCity","47373","thisisme@gmail.com");
 
         HomePage hp = new HomePage(driver);
 
         StorePage sp = hp.clickStoreMenuLink();
 
-        sp.enterTextInSearchField("blue");
+        sp.enterTextInSearchField(searchingFor);
         sp.clickSearchBtn();
 
-        Assert.assertEquals(sp.getTitle(),"Search results: “blue”");
+        Assert.assertEquals(sp.getTitle(),"Search results: “"+searchingFor+"”");
 
-        sp.clickAddToCartBtn("Blue Shoes");
+        sp.clickAddToCartBtn(product.getName());
 
         Thread.sleep(1500);
 
         CartPage cartPage = sp.clickViewCart();
 
-        Assert.assertEquals(cartPage.getProductName(), "Blue Shoes");
+        Assert.assertEquals(cartPage.getProductName(), product.getName());
 
         CheckoutPage checkoutPage = cartPage.clickCheckoutBtn();
 
         driver.findElement(checkoutPage.showLogin).click();
         Thread.sleep(1000);
 
-        checkoutPage.login("Fufel","TsqvCmNjwGde2tm");
+        checkoutPage.login(user);
 
         checkoutPage.setBillingAddress(billingAddress).placeOrder();
 
