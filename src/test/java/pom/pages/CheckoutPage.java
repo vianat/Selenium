@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import pom.base.BasePage;
 import pom.objects.BillingAddress;
+import pom.objects.User;
 
 public class CheckoutPage extends BasePage {
 
@@ -13,11 +14,11 @@ public class CheckoutPage extends BasePage {
     private final By zipField = By.id("billing_postcode");
     private final By emailField = By.id("billing_email");
     private final By notice = By.tagName("h1");
-    public final By placeOrderBtn = By.xpath("//button[@id='place_order']");
-    public final By showLogin = By.cssSelector(".showlogin");
-    public final By usernameField = By.id("username");
-    public final By passwordField = By.id("password");
-    public final By loginBtn = By.cssSelector("button[value='Login']");
+    private final By placeOrderBtn = By.xpath("//button[@id='place_order']");
+    public  final By showLogin = By.cssSelector(".showlogin");
+    private final By usernameField = By.id("username");
+    private final By passwordField = By.id("password");
+    private final By loginBtn = By.cssSelector("button[value='Login']");
 
 
     public CheckoutPage(WebDriver driver) {
@@ -78,9 +79,9 @@ public class CheckoutPage extends BasePage {
         return this;
     }
 
-    public CheckoutPage login(String name, String password) {
-        enterUserName(name);
-        enterPassword(password);
+    public CheckoutPage login(User user) {
+        enterUserName(user.getUserName());
+        enterPassword(user.getPassword());
         clickLoginBtn();
         return this;
     }
