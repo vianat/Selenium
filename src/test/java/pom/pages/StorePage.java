@@ -10,6 +10,7 @@ public class StorePage extends BasePage {
     private final By searchButton = By.cssSelector("button[value='Search']");
     private final By title = By.xpath("//h1[contains(text(),'Search results: “blue”')]");
     private final By addToCartBtn = By.cssSelector("a[aria-label='Add “Blue Shoes” to your cart']");
+    private final By viewCart = By.cssSelector("a[title='View cart']");
 
     public StorePage(WebDriver driver) {
         super(driver);
@@ -20,6 +21,10 @@ public class StorePage extends BasePage {
     public void clickSearchBtn(){
         driver.findElement(searchButton).click();
     }
+    public CartPage clickViewCart(){
+        driver.findElement(viewCart).click();
+        return new CartPage(driver);
+    }
     public String getTitle(){
         return driver.findElement(title).getText();
     }
@@ -29,6 +34,7 @@ public class StorePage extends BasePage {
     private By getAddToCartElement(String productName){
         return By.cssSelector("a[aria-label='Add “"+ productName +"” to your cart']");
     }
+
     public StorePage search(String text){
         enterTextInSearchField(text);
         clickSearchBtn();
