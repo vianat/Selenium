@@ -2,9 +2,15 @@ package pom.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pom.base.BasePage;
 import pom.objects.BillingAddress;
 import pom.objects.User;
+
+import java.time.Duration;
+import java.util.List;
 
 public class CheckoutPage extends BasePage {
 
@@ -19,6 +25,7 @@ public class CheckoutPage extends BasePage {
     private final By usernameField = By.id("username");
     private final By passwordField = By.id("password");
     private final By loginBtn = By.cssSelector("button[value='Login']");
+    private final By overlay = By.cssSelector(".blockUI .blockOverlay");
 
 
     public CheckoutPage(WebDriver driver) {
@@ -73,8 +80,15 @@ public class CheckoutPage extends BasePage {
                 .enterZIP(billingAddress.getZip())
                 .enterEmail(billingAddress.getEmail());
     }
-    public CheckoutPage placeOrder() throws InterruptedException {
-        Thread.sleep(1000);
+    public CheckoutPage placeOrder() {
+
+        List<WebElement> overlays = driver.findElements(overlay);
+        System.out.println("overlay size " + overlays.size());
+        if (overlays.size() > 0){
+            new WebDriverWait(driver, Duration.ofSeconds(10))
+                    .until(ExpectedConditions.visibilityOfAllElements(overlays));
+        }
+        System.out.println("no overlay");
         driver.findElement(placeOrderBtn).click();
         return this;
     }
