@@ -3,14 +3,9 @@ package pom.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pom.base.BasePage;
 import pom.objects.BillingAddress;
 import pom.objects.User;
-
-import java.time.Duration;
-import java.util.List;
 
 public class CheckoutPage extends BasePage {
 
@@ -20,9 +15,9 @@ public class CheckoutPage extends BasePage {
     private final By zipField = By.id("billing_postcode");
     private final By emailField = By.id("billing_email");
     private final By notice = By.tagName("h1");
-    private final By placeOrderBtn = By.xpath("//button[@id='place_order']");
+    private final By placeOrderBtn = By.id("place_order");
     public  final By showLogin = By.cssSelector(".showlogin");
-    private final By usernameField = By.id("username");
+    private final By userNameField = By.id("username");
     private final By passwordField = By.id("password");
     private final By loginBtn = By.cssSelector("button[value='Login']");
     private final By overlay = By.cssSelector(".blockUI .blockOverlay");
@@ -33,43 +28,51 @@ public class CheckoutPage extends BasePage {
     }
 
     private CheckoutPage enterUserName(String name) {
-        driver.findElement(usernameField).clear();
-        driver.findElement(usernameField).sendKeys(name);
+        WebElement e = waitForElementToBeVisible(userNameField);
+        e.clear();
+        e.sendKeys(name);
         return this;
     }
     private CheckoutPage enterPassword(String pass) {
-        driver.findElement(passwordField).clear();
-        driver.findElement(passwordField).sendKeys(pass);
+        WebElement e = waitForElementToBeVisible(passwordField);
+        e.clear();
+        e.sendKeys(pass);
         return this;
     }
     private CheckoutPage clickLoginBtn() {
-        driver.findElement(loginBtn).click();
+        WebElement e = waitForElementToBeVisible(loginBtn);
+        e.click();
         return this;
     }
 
     private CheckoutPage enterFirstname(String name) {
-        driver.findElement(firstNameField).clear();
-        driver.findElement(firstNameField).sendKeys(name);
+        WebElement e = waitForElementToBeVisible(firstNameField);
+        e.clear();
+        e.sendKeys(name);
         return this;
     }
     private CheckoutPage enterLastname(String lName) {
-        driver.findElement(lastNameField).clear();
-        driver.findElement(lastNameField).sendKeys(lName);
+        WebElement e = waitForElementToBeVisible(lastNameField);
+        e.clear();
+        e.sendKeys(lName);
         return this;
     }
     private CheckoutPage enterCity(String city) {
-        driver.findElement(cityField).clear();
-        driver.findElement(cityField).sendKeys(city);
+        WebElement e = waitForElementToBeVisible(cityField);
+        e.clear();
+        e.sendKeys(city);
         return this;
     }
     private CheckoutPage enterZIP(String zip) {
-        driver.findElement(zipField).clear();
-        driver.findElement(zipField).sendKeys(zip);
+        WebElement e = waitForElementToBeVisible(zipField);
+        e.clear();
+        e.sendKeys(zip);
         return this;
     }
     private CheckoutPage enterEmail(String email) {
-        driver.findElement(emailField).clear();
-        driver.findElement(emailField).sendKeys(email);
+        WebElement e = waitForElementToBeVisible(emailField);
+        e.clear();
+        e.sendKeys(email);
         return this;
     }
 
@@ -80,16 +83,10 @@ public class CheckoutPage extends BasePage {
                 .enterZIP(billingAddress.getZip())
                 .enterEmail(billingAddress.getEmail());
     }
-    public CheckoutPage placeOrder() {
-
-        List<WebElement> overlays = driver.findElements(overlay);
-        System.out.println("overlay size " + overlays.size());
-        if (overlays.size() > 0){
-            new WebDriverWait(driver, Duration.ofSeconds(10))
-                    .until(ExpectedConditions.visibilityOfAllElements(overlays));
-        }
-        System.out.println("no overlay");
-        driver.findElement(placeOrderBtn).click();
+    public CheckoutPage placeOrder() throws InterruptedException {
+        Thread.sleep(200);
+        waitForOverlaysToDisappear(overlay);
+        waitForElementToBeClickable(placeOrderBtn).click();
         return this;
     }
 
@@ -100,6 +97,7 @@ public class CheckoutPage extends BasePage {
         return this;
     }
     public String getNoticeText() {
-        return driver.findElement(notice).getText();
+        WebElement e = waitForElementToBeVisible(notice);
+        return e.getText();
     }
 }

@@ -15,7 +15,6 @@ import java.io.IOException;
 public class MainTest extends BaseTest {
 
 
-
     @Test
     public  void e2e() throws InterruptedException, IOException {
         String searchingFor = "blue";
@@ -31,7 +30,7 @@ public class MainTest extends BaseTest {
                 .clickStoreMenuLink()
                 .search(searchingFor);
 
-        Assert.assertEquals(storePage.getTitle(),"Search results: “"+searchingFor+"”");
+        Assert.assertEquals(storePage.getTitle(),"Search results: “" + searchingFor + "”");
 
         storePage.clickAddToCartBtn(product.getName());
 
@@ -83,7 +82,9 @@ public class MainTest extends BaseTest {
 
         checkoutPage.login(user);
 
-        checkoutPage.setBillingAddress(billingAddress).placeOrder();
+        checkoutPage
+                .setBillingAddress(billingAddress)
+                .placeOrder();
 
         Assert.assertEquals(checkoutPage.getNoticeText(), "Checkout");
 

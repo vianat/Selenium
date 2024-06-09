@@ -11,7 +11,8 @@ public class DriverManager {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+//        hard fix all waits
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         return driver;
     }
