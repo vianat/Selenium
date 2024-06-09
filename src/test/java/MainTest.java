@@ -1,4 +1,3 @@
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pom.base.BaseTest;
@@ -12,10 +11,8 @@ import pom.pages.StorePage;
 import utils.JacksonUtils;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 public class MainTest extends BaseTest {
-
 
 
     @Test
@@ -28,17 +25,14 @@ public class MainTest extends BaseTest {
 //v2    BillingAddress billingAddress = new BillingAddress("myName","myLastName","myCity","47373","thisisme@gmail.com");
 
 
-
         StorePage storePage = new HomePage(driver)
                 .load()
                 .clickStoreMenuLink()
                 .search(searchingFor);
 
-        Assert.assertEquals(storePage.getTitle(),"Search results: “"+searchingFor+"”");
+        Assert.assertEquals(storePage.getTitle(),"Search results: “" + searchingFor + "”");
 
         storePage.clickAddToCartBtn(product.getName());
-
-        Thread.sleep(1500);
 
         CartPage cartPage = storePage.clickViewCart();
 
@@ -48,8 +42,6 @@ public class MainTest extends BaseTest {
                 clickCheckoutBtn().
                 setBillingAddress(billingAddress).
                 placeOrder();
-
-        Thread.sleep(1500);
 
         Assert.assertEquals(checkoutPage.getNoticeText(), "Checkout");
 
@@ -90,7 +82,9 @@ public class MainTest extends BaseTest {
 
         checkoutPage.login(user);
 
-        checkoutPage.setBillingAddress(billingAddress).placeOrder();
+        checkoutPage
+                .setBillingAddress(billingAddress)
+                .placeOrder();
 
         Assert.assertEquals(checkoutPage.getNoticeText(), "Checkout");
 

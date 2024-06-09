@@ -2,6 +2,8 @@ package pom.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pom.base.BasePage;
 
 public class HomePage extends BasePage {
@@ -13,11 +15,13 @@ public class HomePage extends BasePage {
     }
 
     public StorePage clickStoreMenuLink(){
-        driver.findElement(storeMenuLink).click();
+        WebElement e = waitForElementToBeClickable(storeMenuLink);
+        e.click();
         return new StorePage(driver);
     }
     public HomePage load(){
         load("/");
+        wait.until(ExpectedConditions.titleContains("AskODch"));
         return this;
     }
 }
