@@ -3,6 +3,10 @@ package pom.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import pom.base.BasePage;
@@ -11,26 +15,43 @@ import pom.objects.User;
 
 public class CheckoutPage extends BasePage {
 
-    private final By firstNameField = By.id("billing_first_name");
-    private final By lastNameField = By.id("billing_last_name");
-    private final By cityField = By.id("billing_city");
-    private final By countryDropDown = By.id("billing_country");
-    private final By stateDropDown = By.id("billing_state");
-    private final By zipField = By.id("billing_postcode");
-    private final By emailField = By.id("billing_email");
-    private final By notice = By.tagName("h1");
-    private final By placeOrderBtn = By.id("place_order");
-    public  final By showLogin = By.cssSelector(".showlogin");
-    private final By userNameField = By.id("username");
-    private final By passwordField = By.id("password");
-    private final By loginBtn = By.cssSelector("button[value='Login']");
+//    private final By firstNameField = By.id("billing_first_name");
+    @FindBy(how = How.ID, using = "billing_first_name") private WebElement firstNameField;
+//    private final By lastNameField = By.id("billing_last_name");
+    @FindBy(how = How.ID, using = "billing_last_name") private WebElement lastNameField;
+//    private final By cityField = By.id("billing_city");
+    @FindBy(how = How.ID, using = "billing_city") private WebElement cityField;
+//    private final By countryDropDown = By.id("billing_country");
+    @FindBy(how = How.ID, using = "billing_country") private WebElement countryDropDown;
+//    private final By stateDropDown = By.id("billing_state");
+    @FindBy(how = How.ID, using = "billing_state") private WebElement stateDropDown;
+//    private final By zipField = By.id("billing_postcode");
+    @FindBy(how = How.ID, using = "billing_postcode") private WebElement zipField;
+//    private final By emailField = By.id("billing_email");
+    @FindBy(how = How.ID, using = "billing_email") private WebElement emailField;
+//    private final By notice = By.tagName("h1");
+    @FindBy(how = How.TAG_NAME, using = "h1") private WebElement notice;
+//    private final By placeOrderBtn = By.id("place_order");
+    @FindBy(how = How.ID, using = "place_order") private WebElement placeOrderBtn;
+//    public  final By showLogin = By.cssSelector(".showlogin");
+    @FindBy(how = How.CSS, using = ".showlogin") public WebElement showLogin;
+//    private final By userNameField = By.id("username");
+    @FindBy(how = How.ID, using = "username") private WebElement userNameField;
+//    private final By passwordField = By.id("password");
+    @FindBy(how = How.ID, using = "password") private WebElement passwordField;
+//    private final By loginBtn = By.cssSelector("button[value='Login']");
+    @FindBy(how = How.CSS, using = "button[value='Login']") private WebElement loginBtn;
     private final By overlay = By.cssSelector(".blockUI .blockOverlay");
-    private final By directBankTransferRadioBtn = By.id("payment_method_bacs");
+//    @FindBy(how = How.CSS, using = ".blockUI .blockOverlay") private WebElement overlay;
+//    private final By directBankTransferRadioBtn = By.id("payment_method_bacs");
+    @FindBy(how = How.ID, using = "payment_method_bacs")@CacheLookup
+    private WebElement directBankTransferRadioBtn;
 
 
 
     public CheckoutPage(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
     }
 
     private CheckoutPage enterUserName(String name) {
@@ -71,13 +92,13 @@ public class CheckoutPage extends BasePage {
     }
     private CheckoutPage selectCountry(String countryName) {
         WebElement e = waitForElementToBeVisible(countryDropDown);
-        Select select = new Select(driver.findElement(countryDropDown));
+        Select select = new Select(countryDropDown);
         select.selectByVisibleText(countryName);
         return this;
     }
     private CheckoutPage selectState(String stateName) {
         WebElement e = waitForElementToBeVisible(stateDropDown);
-        Select select = new Select(driver.findElement(stateDropDown));
+        Select select = new Select(stateDropDown);
         select.selectByVisibleText(stateName);
         return this;
     }
@@ -104,7 +125,7 @@ public class CheckoutPage extends BasePage {
                 .enterEmail(billingAddress.getEmail());
     }
     public CheckoutPage placeOrder() throws InterruptedException {
-        Thread.sleep(200);
+        Thread.sleep(300);
         waitForOverlaysToDisappear(overlay);
         waitForElementToBeClickable(placeOrderBtn).click();
         return this;

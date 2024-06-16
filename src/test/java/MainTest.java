@@ -78,7 +78,7 @@ public class MainTest extends BaseTest {
 
         CheckoutPage checkoutPage = cartPage.clickCheckoutBtn();
 
-        driver.findElement(checkoutPage.showLogin).click();
+        checkoutPage.showLogin.click();
         Thread.sleep(1000);
 
         checkoutPage.login(user);
