@@ -21,8 +21,8 @@ public class MainTest extends BaseTest {
         Product product = new Product(1215);
 //v1
         BillingAddress billingAddress = JacksonUtils.deserializeJson("myBillingAdress.json", BillingAddress.class);
-
-//v2    BillingAddress billingAddress = new BillingAddress("myName","myLastName","myCity","47373","thisisme@gmail.com");
+//v2
+//    BillingAddress billingAddress = new BillingAddress("myName","myLastName","myCity","47373","thisisme@gmail.com", "India", "Maharashtra");
 
 
         StorePage storePage = new HomePage(driver)
@@ -38,10 +38,11 @@ public class MainTest extends BaseTest {
 
         Assert.assertEquals(cartPage.getProductName(), product.getName());
 
-        CheckoutPage checkoutPage = cartPage.
-                clickCheckoutBtn().
-                setBillingAddress(billingAddress).
-                placeOrder();
+        CheckoutPage checkoutPage = cartPage
+                .clickCheckoutBtn()
+                .setBillingAddress(billingAddress)
+                .selectDirectBankTransfer()
+                .placeOrder();
 
         Assert.assertEquals(checkoutPage.getNoticeText(), "Checkout");
 
@@ -54,9 +55,9 @@ public class MainTest extends BaseTest {
         Product product = new Product(1215);
         User user = new User("Fufel", "TsqvCmNjwGde2tm");
 //v1
-        BillingAddress billingAddress = JacksonUtils.deserializeJson("myBillingAdress.json", BillingAddress.class);
-
-//v2    BillingAddress billingAddress = new BillingAddress("myName","myLastName","myCity","47373","thisisme@gmail.com");
+//        BillingAddress billingAddress = JacksonUtils.deserializeJson("myBillingAdress.json", BillingAddress.class);
+//v2
+        BillingAddress billingAddress = new BillingAddress("myName","myLastName","myCity","47373","thisisme@gmail.com", "India", "Maharashtra");
 
         HomePage hp = new HomePage(driver);
 
@@ -84,6 +85,7 @@ public class MainTest extends BaseTest {
 
         checkoutPage
                 .setBillingAddress(billingAddress)
+                .selectDirectBankTransfer()
                 .placeOrder();
 
         Assert.assertEquals(checkoutPage.getNoticeText(), "Checkout");
