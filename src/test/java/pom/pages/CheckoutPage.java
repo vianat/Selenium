@@ -1,6 +1,7 @@
 package pom.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -46,6 +47,8 @@ public class CheckoutPage extends BasePage {
 //    private final By directBankTransferRadioBtn = By.id("payment_method_bacs");
     @FindBy(how = How.ID, using = "payment_method_bacs")@CacheLookup
     private WebElement directBankTransferRadioBtn;
+    private final By alternativeDropDown = By.id("select2-billing_country-container");
+    private final By alternativeStateDropDown = By.id("select2-billing_state-container");
 
 
 
@@ -91,15 +94,31 @@ public class CheckoutPage extends BasePage {
         return this;
     }
     private CheckoutPage selectCountry(String countryName) {
-        WebElement e = waitForElementToBeVisible(countryDropDown);
-        Select select = new Select(countryDropDown);
-        select.selectByVisibleText(countryName);
+//        through Select, chrome -> ok
+//        WebElement e = waitForElementToBeVisible(countryDropDown);
+//        Select select = new Select(e);
+//        select.selectByVisibleText(countryName);
+
+//        Firefox hide dropdown list use this ->
+         wait.until(ExpectedConditions.elementToBeClickable(alternativeDropDown)).click();
+         WebElement e = waitForElementToBeClickable(By.xpath("//li[text()='" + countryName + "']"));
+         ((JavascriptExecutor) driver). executeScript("arguments[0].scrollIntoView(true);", e);
+         e.click();
+
         return this;
     }
     private CheckoutPage selectState(String stateName) {
-        WebElement e = waitForElementToBeVisible(stateDropDown);
-        Select select = new Select(stateDropDown);
-        select.selectByVisibleText(stateName);
+//        for chrome -> use Select, ff -> x
+//        WebElement e = waitForElementToBeVisible(stateDropDown);
+//        Select select = new Select(e);
+//        select.selectByVisibleText(stateName);
+
+//        for Firefox (hidden dropdown list) use scroll ->
+        wait.until(ExpectedConditions.elementToBeClickable(alternativeStateDropDown)).click();
+        WebElement e = waitForElementToBeClickable(By.xpath("//li[text()='" + stateName + "']"));
+        ((JavascriptExecutor) driver). executeScript("arguments[0].scrollIntoView(true);", e);
+        e.click();
+
         return this;
     }
     private CheckoutPage enterZIP(String zip) {
@@ -125,7 +144,7 @@ public class CheckoutPage extends BasePage {
                 .enterEmail(billingAddress.getEmail());
     }
     public CheckoutPage placeOrder() throws InterruptedException {
-        Thread.sleep(300);
+        Thread.sleep(500);
         waitForOverlaysToDisappear(overlay);
         waitForElementToBeClickable(placeOrderBtn).click();
         return this;
