@@ -1,9 +1,0 @@
-{
-  "firstName" : "myName",
-  "lastName" : "lastName",
-  "city" : "myCity",
-  "zip" : 411001,
-  "email" : "thisisme@gmail.com",
-  "country" : "India",
-  "state" : "Maharashtra"
-}

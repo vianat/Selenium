@@ -20,6 +20,7 @@ public class BasePage {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
     }
+
     public void load(String endpoint){
         driver.get("https://askomdch.com" + endpoint);
     }
@@ -44,6 +45,7 @@ public class BasePage {
     public WebElement waitForElementToBeClickable(WebElement element){
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
+
     public WebElement waitForElementToBeClickable(By element){
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
