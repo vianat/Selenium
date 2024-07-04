@@ -144,7 +144,7 @@ public class CheckoutPage extends BasePage {
                 .enterEmail(billingAddress.getEmail());
     }
     public CheckoutPage placeOrder() throws InterruptedException {
-        Thread.sleep(500);
+        Thread.sleep(700);
         waitForOverlaysToDisappear(overlay);
         waitForElementToBeClickable(placeOrderBtn).click();
         return this;
