@@ -33,7 +33,7 @@ public class DriverManager {
                 WebDriverManager.edgedriver().cachePath("Drivers").setup();
                 yield new EdgeDriver();
             }
-            default -> throw new IllegalStateException("************************ INVALID BROWSER NAME ************************ => " + browser);
+            default -> throw new IllegalStateException("******************** INVALID BROWSER NAME ******************** => " + browser);
         };
 
         driver.manage().window().maximize();
