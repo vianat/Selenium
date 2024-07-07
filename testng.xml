@@ -9,18 +9,18 @@
         </classes>
     </test>
 
-<!--    <test name="FIREFOX">-->
-<!--        <parameter name="browser" value="FIREFOX"/>-->
-<!--        <classes>-->
-<!--            <class name="tests.MainTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="FIREFOX">
+        <parameter name="browser" value="FIREFOX"/>
+        <classes>
+            <class name="tests.MainTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="EDGE">-->
-<!--        <parameter name="browser" value="EDGE"/>-->
-<!--        <classes>-->
-<!--            <class name="tests.MainTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="EDGE">
+        <parameter name="browser" value="EDGE"/>
+        <classes>
+            <class name="tests.MainTest"/>
+        </classes>
+    </test>
 
 </suite>

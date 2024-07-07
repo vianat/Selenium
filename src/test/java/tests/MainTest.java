@@ -27,7 +27,7 @@ public class MainTest extends BaseTest {
 //      BillingAddress billingAddress = new BillingAddress("myName","myLastName","myCity","47373","thisisme@gmail.com", "India", "Maharashtra");
 
 
-        StorePage storePage = new HomePage(driver)
+        StorePage storePage = new HomePage(getDriver())
                 .load()
                 .clickStoreMenuLink()
                 .search(searchingFor);
@@ -61,7 +61,7 @@ public class MainTest extends BaseTest {
 //v2
         BillingAddress billingAddress = new BillingAddress("myName","myLastName","myCity","47373","thisisme@gmail.com", "India", "Maharashtra");
 
-        HomePage hp = new HomePage(driver);
+        HomePage hp = new HomePage(getDriver());
 
         StorePage sp = hp.clickStoreMenuLink();
 
@@ -93,4 +93,56 @@ public class MainTest extends BaseTest {
         Assert.assertEquals(checkoutPage.getNoticeText(), "Checkout");
 
     }
+
+
+
+    @Test
+    public  void e2e2() throws InterruptedException, IOException {
+        e2e();
+    }
+
+    @Test
+    public  void e2eWithLogin2() throws InterruptedException, IOException {
+        e2eWithLogin();
+    }
+
+    @Test
+    public  void e2e3() throws InterruptedException, IOException {
+        e2e();
+    }
+
+    @Test
+    public  void e2eWithLogin3() throws InterruptedException, IOException {
+        e2eWithLogin();
+    }
+
+    @Test
+    public  void e2e4() throws InterruptedException, IOException {
+        e2e();
+    }
+
+    @Test
+    public  void e2eWithLogin4() throws InterruptedException, IOException {
+        e2eWithLogin();
+    }
+
+    @Test
+    public  void e2e5() throws InterruptedException, IOException {
+        e2e();
+    }
+
+    @Test
+    public  void e2eWithLogin5() throws InterruptedException, IOException {
+        e2eWithLogin();
+    }
+
 }
+
+// 1 - 5.22
+// 2 - 2.53
+// 3 - 2.20
+// 4 - 2.36
+// 5 - 1.58
+// 6 - 1.58
+// 7 - 2.05
+// 10 - 2.05
