@@ -7,17 +7,24 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
-    protected WebDriver driver;
+    private ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+
+    private void setDriver(WebDriver driver){
+        this.driver.set(driver);
+    }
+    protected WebDriver getDriver(){
+        return this.driver.get();
+    }
 
     @Parameters("browser")
     @BeforeMethod
     public void startDriver(String browser){
-        driver = new DriverManager().initializeDriver(browser);
-        driver.get("https://askomdch.com");
+        setDriver(new DriverManager().initializeDriver(browser));
+        getDriver().get("https://askomdch.com");
     }
 
     @AfterMethod
     public void quitDriver(){
-        driver.quit();
+        getDriver().quit();
     }
 }
