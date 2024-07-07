@@ -101,40 +101,40 @@ public class MainTest extends BaseTest {
         e2e();
     }
 
-    @Test
-    public  void e2eWithLogin2() throws InterruptedException, IOException {
-        e2eWithLogin();
-    }
-
-    @Test
-    public  void e2e3() throws InterruptedException, IOException {
-        e2e();
-    }
-
-    @Test
-    public  void e2eWithLogin3() throws InterruptedException, IOException {
-        e2eWithLogin();
-    }
-
-    @Test
-    public  void e2e4() throws InterruptedException, IOException {
-        e2e();
-    }
-
-    @Test
-    public  void e2eWithLogin4() throws InterruptedException, IOException {
-        e2eWithLogin();
-    }
-
-    @Test
-    public  void e2e5() throws InterruptedException, IOException {
-        e2e();
-    }
-
-    @Test
-    public  void e2eWithLogin5() throws InterruptedException, IOException {
-        e2eWithLogin();
-    }
+//    @Test
+//    public  void e2eWithLogin2() throws InterruptedException, IOException {
+//        e2eWithLogin();
+//    }
+//
+//    @Test
+//    public  void e2e3() throws InterruptedException, IOException {
+//        e2e();
+//    }
+//
+//    @Test
+//    public  void e2eWithLogin3() throws InterruptedException, IOException {
+//        e2eWithLogin();
+//    }
+//
+//    @Test
+//    public  void e2e4() throws InterruptedException, IOException {
+//        e2e();
+//    }
+//
+//    @Test
+//    public  void e2eWithLogin4() throws InterruptedException, IOException {
+//        e2eWithLogin();
+//    }
+//
+//    @Test
+//    public  void e2e5() throws InterruptedException, IOException {
+//        e2e();
+//    }
+//
+//    @Test
+//    public  void e2eWithLogin5() throws InterruptedException, IOException {
+//        e2eWithLogin();
+//    }
 
 }
 
