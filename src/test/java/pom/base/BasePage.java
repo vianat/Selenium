@@ -34,7 +34,7 @@ public class BasePage {
             wait.until(ExpectedConditions.visibilityOfAllElements(overlays));
 //            System.out.println("no overlay");
         } else {
-//            System.out.println("overlay not found");
+            System.out.println("overlay not found");
         }
     }
 

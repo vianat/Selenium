@@ -7,8 +7,6 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import pom.constants.DriverType;
 
-import java.time.Duration;
-
 public class DriverManager {
 
     public WebDriver initializeDriver(String browser) {
