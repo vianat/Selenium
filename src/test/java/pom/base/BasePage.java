@@ -6,9 +6,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.ConfigLoader;
 
+import java.sql.SQLException;
 import java.time.Duration;
 import java.util.List;
+
+import static java.sql.DriverManager.getDriver;
 
 public class BasePage {
     protected WebDriver driver;
@@ -21,8 +25,8 @@ public class BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public void load(String endpoint){
-        driver.get("https://askomdch.com" + endpoint);
+    public void load(String endpoint) {
+        driver.get(ConfigLoader.getInstance().getBaseUrl() + endpoint);
     }
 
     public void waitForOverlaysToDisappear(By overlay){
@@ -43,7 +47,7 @@ public class BasePage {
     }
 
     public WebElement waitForElementToBeClickable(WebElement element){
-        return wait.until(ExpectedConditions.elementToBeClickable(element));
+        return wait.until(ExpectedConditions.elementToBeClickable(waitForElementToBeVisible(element)));
     }
 
     public WebElement waitForElementToBeClickable(By element){

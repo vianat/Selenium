@@ -10,6 +10,7 @@ import pom.pages.CartPage;
 import pom.pages.CheckoutPage;
 import pom.pages.HomePage;
 import pom.pages.StorePage;
+import utils.ConfigLoader;
 import utils.JacksonUtils;
 
 import java.io.IOException;
@@ -55,7 +56,7 @@ public class MainTest extends BaseTest {
 
         String searchingFor = "blue";
         Product product = new Product(1215);
-        User user = new User("Fufel", "TsqvCmNjwGde2tm");
+        User user = new User(ConfigLoader.getInstance().getUserNAme(), ConfigLoader.getInstance().getPassword());
 //v1
 //        BillingAddress billingAddress = JacksonUtils.deserializeJson("myBillingAddress.json", BillingAddress.class);
 //v2
@@ -68,7 +69,7 @@ public class MainTest extends BaseTest {
         sp.enterTextInSearchField(searchingFor);
         sp.clickSearchBtn();
 
-        Assert.assertEquals(sp.getTitle(),"Search results: “"+searchingFor+"”");
+        Assert.assertEquals(sp.getTitle(),"Search results: “" + searchingFor + "”");
 
         sp.clickAddToCartBtn(product.getName());
 
@@ -93,48 +94,6 @@ public class MainTest extends BaseTest {
         Assert.assertEquals(checkoutPage.getNoticeText(), "Checkout");
 
     }
-
-
-
-    @Test
-    public  void e2e2() throws InterruptedException, IOException {
-        e2e();
-    }
-
-//    @Test
-//    public  void e2eWithLogin2() throws InterruptedException, IOException {
-//        e2eWithLogin();
-//    }
-//
-//    @Test
-//    public  void e2e3() throws InterruptedException, IOException {
-//        e2e();
-//    }
-//
-//    @Test
-//    public  void e2eWithLogin3() throws InterruptedException, IOException {
-//        e2eWithLogin();
-//    }
-//
-//    @Test
-//    public  void e2e4() throws InterruptedException, IOException {
-//        e2e();
-//    }
-//
-//    @Test
-//    public  void e2eWithLogin4() throws InterruptedException, IOException {
-//        e2eWithLogin();
-//    }
-//
-//    @Test
-//    public  void e2e5() throws InterruptedException, IOException {
-//        e2e();
-//    }
-//
-//    @Test
-//    public  void e2eWithLogin5() throws InterruptedException, IOException {
-//        e2eWithLogin();
-//    }
 
 }
 

@@ -1,6 +1,5 @@
 package pom.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,8 +18,9 @@ public class HomePage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public StorePage clickStoreMenuLink(){
-        WebElement e = waitForElementToBeClickable(storeMenuLink);
+    public StorePage clickStoreMenuLink() throws InterruptedException {
+        Thread.sleep(500);
+        WebElement e = waitForElementToBeClickable(waitForElementToBeVisible(storeMenuLink));
         e.click();
         return new StorePage(driver);
     }
