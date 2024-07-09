@@ -18,8 +18,9 @@ public class HomePage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public StorePage clickStoreMenuLink(){
-        WebElement e = waitForElementToBeClickable(storeMenuLink);
+    public StorePage clickStoreMenuLink() throws InterruptedException {
+        Thread.sleep(500);
+        WebElement e = waitForElementToBeClickable(waitForElementToBeVisible(storeMenuLink));
         e.click();
         return new StorePage(driver);
     }

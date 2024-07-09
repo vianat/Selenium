@@ -2,21 +2,21 @@
 
 <suite name="Suite" verbose="1" thread-count="1" parallel="tests">
 
-    <test name="CHROME" thread-count="3" parallel="methods">
+    <test name="CHROME" thread-count="2" parallel="methods">
         <parameter name="browser" value="CHROME"/>
         <classes>
             <class name="tests.MainTest"/>
         </classes>
     </test>
 
-    <test name="FIREFOX" thread-count="3" parallel="methods">
+    <test name="FIREFOX" thread-count="2" parallel="methods">
         <parameter name="browser" value="FIREFOX"/>
         <classes>
             <class name="tests.MainTest"/>
         </classes>
     </test>
 
-    <test name="EDGE" thread-count="3" parallel="methods">
+    <test name="EDGE" thread-count="2" parallel="methods">
         <parameter name="browser" value="EDGE"/>
         <classes>
             <class name="tests.MainTest"/>
