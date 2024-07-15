@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.annotations.Parameters;
 import pom.base.BasePage;
 
 public class StorePage extends BasePage {
@@ -16,7 +17,7 @@ public class StorePage extends BasePage {
 //    private final By searchButton = By.cssSelector("button[value='Search']");
     @FindBy(how = How.CSS, using = "button[value='Search']") private WebElement searchButton;
 //    private final By title = By.xpath("//h1[contains(text(),'Search results: “blue”')]");
-    @FindBy(how = How.XPATH, using = "//h1[contains(text(),'Search results: “blue”')]") private WebElement title;
+    @FindBy(how = How.XPATH, using = "//h1") private WebElement title;
 //    private final By viewCart = By.cssSelector("a[title='View cart']");
     @FindBy(how = How.CSS, using = "a[title='View cart']") private WebElement viewCart;
 
@@ -24,7 +25,10 @@ public class StorePage extends BasePage {
         super(driver);
         PageFactory.initElements(driver, this);
     }
-
+    public StorePage load(){
+        load("/store");
+        return this;
+    }
     public boolean isLoaded() {
         return wait.until(ExpectedConditions.urlContains("/store"));
     }
@@ -45,9 +49,10 @@ public class StorePage extends BasePage {
         WebElement e = waitForElementToBeVisible(title);
         return e.getText();
     }
-    public void clickAddToCartBtn(String text){
+    public StorePage clickAddToCartBtn(String text){
         WebElement e = waitForElementToBeClickable(getAddToCartElement(text));
         e.click();
+        return this;
     }
     private By getAddToCartElement(String productName){
         return By.cssSelector("a[aria-label='Add “"+ productName +"” to your cart']");

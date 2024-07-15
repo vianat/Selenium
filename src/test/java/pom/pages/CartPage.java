@@ -23,6 +23,10 @@ public class CartPage extends BasePage {
         super(driver);
         PageFactory.initElements(driver, this);
     }
+    public CartPage load(){
+        load("/cart");
+        return this;
+    }
 
     public String getProductName(){
         WebElement e = waitForElementToBeVisible(productName);
