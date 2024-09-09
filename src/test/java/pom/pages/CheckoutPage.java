@@ -48,8 +48,12 @@ public class CheckoutPage extends BasePage {
     private WebElement directBankTransferRadioBtn;
     private final By alternativeDropDown = By.id("select2-billing_country-container");
     private final By alternativeStateDropDown = By.id("select2-billing_state-container");
+    private final By productname = By.cssSelector("td[class='product-name']");
 
-
+    public CheckoutPage load() {
+        load("/checkout/");
+        return this;
+    }
 
     public CheckoutPage(WebDriver driver) {
         super(driver);
@@ -166,5 +170,8 @@ public class CheckoutPage extends BasePage {
             el.click();
         }
         return  this;
+    }
+    public String getProductName(){
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(productname)).getText();
     }
 }

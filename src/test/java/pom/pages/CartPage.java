@@ -13,11 +13,9 @@ public class CartPage extends BasePage {
 //    private final By checkoutBtn = By.xpath("//a[normalize-space()='Proceed to checkout']");
 //    private final By pageHeader = By.cssSelector(".has-text-align-center");
 
-    @FindBy(xpath = "//a[normalize-space()='Blue Shoes']") private WebElement productName;
-    @FindBy(xpath = "//a[normalize-space()='Proceed to checkout']")
-    private WebElement checkoutBtn;
-    @FindBy(css = ".has-text-align-center")
-    private WebElement pageHeader;
+    @FindBy(css = "td[class='product-name'] a") private WebElement productName;
+    @FindBy(xpath = "//a[normalize-space()='Proceed to checkout']") private WebElement checkoutBtn;
+    @FindBy(css = ".has-text-align-center") private WebElement pageHeader;
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -27,19 +25,19 @@ public class CartPage extends BasePage {
         load("/cart");
         return this;
     }
+    public boolean isLoaded() {
+//        u can set the slowest element on the page and wait it. that means page fully loaded
+        return wait.until(ExpectedConditions.textToBePresentInElement(pageHeader, "Cart"));
+    }
 
     public String getProductName(){
         WebElement e = waitForElementToBeVisible(productName);
         return e.getText();
     }
+
     public CheckoutPage clickCheckoutBtn(){
         WebElement e = waitForElementToBeClickable(checkoutBtn);
         e.click();
         return new CheckoutPage(driver);
-    }
-
-    public boolean isLoaded() {
-//        u can set the slowest element ot the page and wait it. that means page fully loaded
-        return wait.until(ExpectedConditions.textToBePresentInElement(pageHeader, "Cart"));
     }
 }

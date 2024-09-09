@@ -12,7 +12,7 @@
     <test name="FIREFOX">
         <parameter name="browser" value="FIREFOX"/>
         <classes>
-            <class name="tests.MainTest"/>
+            <class name="tests.LoginTest"/>
         </classes>
     </test>
 

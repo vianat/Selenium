@@ -5,8 +5,8 @@ import pom.constants.EnvType;
 import java.util.Properties;
 
 public class ConfigLoader {
-    private  final Properties properties;
-    private  static ConfigLoader configLoader;
+    private final Properties properties;
+    private static ConfigLoader configLoader;
 
     private ConfigLoader(){
 
@@ -35,7 +35,7 @@ public class ConfigLoader {
         else throw new RuntimeException("property baseUrl is not found in stage_config.properties file");
     }
 
-    public String getUserNAme(){
+    public String getUserName(){
         String prop = properties.getProperty("userName");
         if(prop != null) return prop;
         else throw new RuntimeException("property userName is not found in stage_config.properties file");
@@ -45,5 +45,11 @@ public class ConfigLoader {
         String prop = properties.getProperty("password");
         if(prop != null) return prop;
         else throw new RuntimeException("property password is not found in stage_config.properties file");
+    }
+
+    public String getEmail(){
+        String prop = properties.getProperty("email");
+        if(prop != null) return prop;
+        else throw new RuntimeException("property email is not found in stage_config.properties file");
     }
 }
