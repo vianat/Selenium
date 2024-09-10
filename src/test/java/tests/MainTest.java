@@ -56,7 +56,7 @@ public class MainTest extends BaseTest {
 
         String searchingFor = "blue";
         Product product = new Product(1215);
-        User user = new User(ConfigLoader.getInstance().getUserNAme(), ConfigLoader.getInstance().getPassword());
+        User user = new User(ConfigLoader.getInstance().getUserName(), ConfigLoader.getInstance().getPassword(), ConfigLoader.getInstance().getEmail());
 //v1
 //        BillingAddress billingAddress = JacksonUtils.deserializeJson("myBillingAddress.json", BillingAddress.class);
 //v2
