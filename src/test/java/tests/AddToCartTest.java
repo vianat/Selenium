@@ -21,6 +21,7 @@ public class AddToCartTest extends BaseTest {
 
         CartPage cp = new StorePage(getDriver())
                 .load()
+                .getProductComponent()
                 .clickAddToCartBtn(product.getName())
                 .clickViewCart();
 
@@ -32,6 +33,7 @@ public class AddToCartTest extends BaseTest {
 
         CartPage cp = new HomePage(getDriver())
                 .load()
+                .getProductComponent()
                 .clickAddToCartBtn(product.getName())
                 .clickViewCart();
 

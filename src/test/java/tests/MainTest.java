@@ -30,14 +30,15 @@ public class MainTest extends BaseTest {
 
         StorePage storePage = new HomePage(getDriver())
                 .load()
+                .getHeaderComponent()
                 .clickStoreMenuLink()
                 .search(searchingFor);
 
         Assert.assertEquals(storePage.getTitle(),"Search results: “" + searchingFor + "”");
 
-        storePage.clickAddToCartBtn(product.getName());
+        storePage.getProductComponent().clickAddToCartBtn(product.getName());
 
-        CartPage cartPage = storePage.clickViewCart();
+        CartPage cartPage = storePage.getProductComponent().clickViewCart();
 
         Assert.assertEquals(cartPage.getProductName(), product.getName());
 
@@ -64,18 +65,18 @@ public class MainTest extends BaseTest {
 
         HomePage hp = new HomePage(getDriver());
 
-        StorePage sp = hp.clickStoreMenuLink();
+        StorePage sp = hp.getHeaderComponent().clickStoreMenuLink();
 
         sp.enterTextInSearchField(searchingFor);
         sp.clickSearchBtn();
 
         Assert.assertEquals(sp.getTitle(),"Search results: “" + searchingFor + "”");
 
-        sp.clickAddToCartBtn(product.getName());
+        sp.getProductComponent().clickAddToCartBtn(product.getName());
 
         Thread.sleep(1500);
 
-        CartPage cartPage = sp.clickViewCart();
+        CartPage cartPage = sp.getProductComponent().clickViewCart();
 
         Assert.assertEquals(cartPage.getProductName(), product.getName());
 
