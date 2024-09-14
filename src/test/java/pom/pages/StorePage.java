@@ -19,11 +19,15 @@ public class StorePage extends BasePage {
 //    private final By title = By.xpath("//h1[contains(text(),'Search results: “blue”')]");
     @FindBy(how = How.XPATH, using = "//h1") private WebElement title;
 //    private final By viewCart = By.cssSelector("a[title='View cart']");
-    @FindBy(how = How.CSS, using = "a[title='View cart']") private WebElement viewCart;
+
+    private HeaderComponent headerComponent;
+    private ProductComponent productComponent;
 
     public StorePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
+        headerComponent = new HeaderComponent(driver);
+        productComponent = new ProductComponent(driver);
     }
     public StorePage load(){
         load("/store");
@@ -40,27 +44,23 @@ public class StorePage extends BasePage {
         WebElement e = waitForElementToBeClickable(searchButton);
         e.click();
     }
-    public CartPage clickViewCart(){
-        WebElement e = waitForElementToBeClickable(viewCart);
-        e.click();
-        return new CartPage(driver);
-    }
+
     public String getTitle(){
         WebElement e = waitForElementToBeVisible(title);
         return e.getText();
-    }
-    public StorePage clickAddToCartBtn(String text){
-        WebElement e = waitForElementToBeClickable(getAddToCartElement(text));
-        e.click();
-        return this;
-    }
-    private By getAddToCartElement(String productName){
-        return By.cssSelector("a[aria-label='Add “"+ productName +"” to your cart']");
     }
 
     public StorePage search(String text){
         enterTextInSearchField(text);
         clickSearchBtn();
         return this;
+    }
+
+    public ProductComponent getProductComponent() {
+        return productComponent;
+    }
+
+    public HeaderComponent getHeaderComponent() {
+        return headerComponent;
     }
 }

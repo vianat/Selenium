@@ -17,9 +17,12 @@ public class CartPage extends BasePage {
     @FindBy(xpath = "//a[normalize-space()='Proceed to checkout']") private WebElement checkoutBtn;
     @FindBy(css = ".has-text-align-center") private WebElement pageHeader;
 
+    private ProductComponent productComponent;
+
     public CartPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
+        productComponent = new ProductComponent(driver);
     }
     public CartPage load(){
         load("/cart");

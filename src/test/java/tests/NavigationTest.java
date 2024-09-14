@@ -12,6 +12,7 @@ public class NavigationTest extends BaseTest {
     public void navigateFromHomeToStoreUsingMainMenu() throws InterruptedException {
         StorePage storePage = new HomePage(getDriver())
                 .load()
+                .getHeaderComponent()
                 .clickStoreMenuLink();
 
         Assert.assertEquals(storePage.getTitle(),"Store");
